@@ -12,9 +12,8 @@ function withinRange(value, range) {
   return value;
 }
 
-function init() {
+function init(quantitySelectors) {
   const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
-  const quantitySelectors = document.querySelectorAll('.qty-selector');
 
   function syncAllSelectors(store) {
     quantitySelectors.forEach((el) => {

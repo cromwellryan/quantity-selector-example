@@ -39,7 +39,9 @@
     <script type="module">
       import { init } from './index.js';
 
-      init();
+      const quantitySelectors = document.querySelectorAll('.qty-selector');
+
+      init(quantitySelectors);
     </script>
 
   </body>
