@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "check-node-version --package",
+    "test": "teenytest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "teenytest": "^6.0.2"
   },
-  "scripts": {
-    "test": "teenytest"
+  "dependencies": {
+    "check-node-version": "^4.0.3"
+  },
+  "engines": {
+    "node": "^14"
   }
 }
