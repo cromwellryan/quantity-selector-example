@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <!--  Meta  -->
+    <meta charset="UTF-8">
+    <title>My New Project!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--  Styles  -->
+    <link rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+    <h1>Quantity Selector</h1>
+    <div class="qty-selector" data-id="a">
+      <button class="dec">-</button>
+      <input class="qty" type="number" min="1" max="8"/>
+      <button class="inc">+</button>
+    </div>
+    <div class="qty-selector" data-id="a">
+      <button class="dec">-</button>
+      <input class="qty" type="number" min="1" max="8"/>
+      <button class="inc">+</button>
+    </div>
+    <div class="qty-selector" data-id="b">
+      <button class="dec">-</button>
+      <input class="qty" type="number" min="1" max="8"/>
+      <button class="inc">+</button>
+    </div>
+    <div class="qty-selector" data-id="b">
+      <button class="dec">-</button>
+      <input class="qty" type="number" min="1" max="8"/>
+      <button class="inc">+</button>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+      import { init } from './index.js';
+
+      init();
+    </script>
+
+  </body>
+
+</html>
