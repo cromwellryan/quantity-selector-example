@@ -18,6 +18,12 @@ function SelectorComponent(el) {
   this.id = function() {
     return el.dataset.id;
   }
+
+  this.setQuantity = function(newQuantity) {
+    const qty = this.el.querySelector('.qty');
+    qty.value = newQuantity;
+  }
+
 }
 
 function init(quantitySelectors) {
@@ -29,10 +35,9 @@ function init(quantitySelectors) {
 
       /* Need to know the id of the quantity selector */
       const id = selectorComponent.id();
-      const qty = el.querySelector('.qty');
 
       /* Need to set the quantity value it should be at */
-      qty.value = store.state[id];
+      selectorComponent.setQuantity(store.state[id]);
     });
   }
 
