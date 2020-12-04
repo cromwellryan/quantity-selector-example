@@ -12,13 +12,23 @@ function withinRange(value, range) {
   return value;
 }
 
+function SelectorComponent(el) {
+  this.el = el;
+
+  this.id = function() {
+    return el.dataset.id;
+  }
+}
+
 function init(quantitySelectors) {
   const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
 
   function syncAllSelectors(store) {
     quantitySelectors.forEach((el) => {
+      const selectorComponent = new SelectorComponent(el);
+
       /* Need to know the id of the quantity selector */
-      const { id } = el.dataset;
+      const id = selectorComponent.id();
       const qty = el.querySelector('.qty');
 
       /* Need to set the quantity value it should be at */
