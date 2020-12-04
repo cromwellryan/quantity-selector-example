@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "teenytest": "^6.0.2"
+  },
+  "scripts": {
+    "test": "teenytest"
   }
 }
