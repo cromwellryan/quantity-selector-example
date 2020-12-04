@@ -13,10 +13,10 @@ function withinRange(value, range) {
 }
 
 function init() {
-  const myStore = new Store({ a: 2, b: 4 }, update);
+  const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
   const quantitySelectors = document.querySelectorAll('.qty-selector');
 
-  function update(store) {
+  function syncAllSelectors(store) {
     quantitySelectors.forEach((el) => {
       const { id } = el.dataset;
       const qty = el.querySelector('.qty');
@@ -43,7 +43,7 @@ function init() {
     });
   });
 
-  update(myStore);
+  syncAllSelectors(myStore);
 }
 
 export {
