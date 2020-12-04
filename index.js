@@ -16,11 +16,19 @@ function SelectorComponent(el) {
   this.el = el;
 
   const qty = this.el.querySelector('.qty');
+  const inc = this.el.querySelector('.inc');
+  const dec = this.el.querySelector('.dec');
+
 
   qty.addEventListener('change', () => {
     if (this.onChange) this.onChange();
   });
-
+  inc.addEventListener('click', () => {
+    if (this.onIncrement) this.onIncrement();
+  })
+  dec.addEventListener('click', () => {
+    if (this.onDecrement) this.onDecrement();
+  });
 
   this.id = function() {
     return el.dataset.id;
@@ -65,8 +73,6 @@ function init(quantitySelectors) {
 
     const id = selectorComponent.id();
 
-    const inc = container.querySelector('.inc');
-    const dec = container.querySelector('.dec');
 
     /* Need to know the quantity selector range */
     const range = selectorComponent.range();
@@ -76,13 +82,13 @@ function init(quantitySelectors) {
       myStore.mergeState({ [id]: withinRange(selectorComponent.value(), range) });
     }
     /* Need to know when the quantity selector is incremented */
-    inc.addEventListener('click', () => {
+    selectorComponent.onIncrement = () => {
       myStore.mergeState({ [id]: withinRange(selectorComponent.value()+ 1, range) });
-    });
+    };
     /* Need to know when the quantity selector is decremented */
-    dec.addEventListener('click', () => {
+    selectorComponent.onDecrement = () => {
       myStore.mergeState({ [id]: withinRange(selectorComponent.value()- 1, range) });
-    });
+    };
   });
 
   syncAllSelectors(myStore);
