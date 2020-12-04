@@ -19,6 +19,12 @@ function SelectorComponent(el) {
     return el.dataset.id;
   }
 
+  this.range = function() {
+    const qty = this.el.querySelector('.qty');
+
+    return { min: qty.min, max: qty.max };
+  }
+
   this.setQuantity = function(newQuantity) {
     const qty = this.el.querySelector('.qty');
     qty.value = newQuantity;
@@ -42,23 +48,28 @@ function init(quantitySelectors) {
   }
 
   quantitySelectors.forEach((container) => {
-    const { id } = container.dataset;
+    const selectorComponent = new SelectorComponent(container);
+
+    const id = selectorComponent.id();
 
     const qty = container.querySelector('.qty');
     const inc = container.querySelector('.inc');
     const dec = container.querySelector('.dec');
 
+    /* Need to know the quantity selector range */
+    const range = selectorComponent.range();
+
     /* Need to know when the quantity selector is changed */
     qty.addEventListener('change', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10), qty) });
+      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10), range) });
     });
     /* Need to know when the quantity selector is incremented */
     inc.addEventListener('click', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) + 1, qty) });
+      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) + 1, range) });
     });
     /* Need to know when the quantity selector is decremented */
     dec.addEventListener('click', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) - 1, qty) });
+      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) - 1, range) });
     });
   });
 
