@@ -53,19 +53,19 @@ function SelectorComponent(el) {
 
 }
 
-function init(selectorComponents) {
-  const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
 
-  function syncAllSelectors(store) {
-    selectorComponents.forEach((selectorComponent) => {
+function syncAllSelectors(store, selectorComponents) {
+  selectorComponents.forEach((selectorComponent) => {
 
-      /* Need to know the id of the quantity selector */
-      const id = selectorComponent.id();
+    /* Need to know the id of the quantity selector */
+    const id = selectorComponent.id();
 
-      /* Need to set the quantity value it should be at */
-      selectorComponent.setQuantity(store.state[id]);
-    });
-  }
+    /* Need to set the quantity value it should be at */
+    selectorComponent.setQuantity(store.state[id]);
+  });
+}
+
+function init(selectorComponents, store) {
 
   selectorComponents.forEach((selectorComponent) => {
     const id = selectorComponent.id();
@@ -75,24 +75,25 @@ function init(selectorComponents) {
 
     /* Need to know when the quantity selector is changed */
     selectorComponent.onChange = () => {
-      myStore.mergeState({ [id]: withinRange(selectorComponent.value(), range) });
+      store.mergeState({ [id]: withinRange(selectorComponent.value(), range) });
     }
     /* Need to know when the quantity selector is incremented */
     selectorComponent.onIncrement = () => {
-      myStore.mergeState({ [id]: withinRange(selectorComponent.value()+ 1, range) });
+      store.mergeState({ [id]: withinRange(selectorComponent.value()+ 1, range) });
     };
     /* Need to know when the quantity selector is decremented */
     selectorComponent.onDecrement = () => {
-      myStore.mergeState({ [id]: withinRange(selectorComponent.value()- 1, range) });
+      store.mergeState({ [id]: withinRange(selectorComponent.value()- 1, range) });
     };
   });
 
-  syncAllSelectors(myStore);
+  syncAllSelectors(store, selectorComponents);
 }
 
 export {
   Store,
   withinRange,
   SelectorComponent,
+  syncAllSelectors,
   init
 }
