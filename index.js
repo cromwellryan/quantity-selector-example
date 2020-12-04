@@ -12,6 +12,18 @@ function withinRange(value, range) {
   return value;
 }
 
+/* SelectorComponent implements the Adapter Pattern
+ * against the DOM element(s) that make up a Quantity Selector.
+ *
+ * The purpose of this adapter (or component) is to provide a
+ * contract for interacting with a part of the system that we
+ * don't own and is awkward to test and control. The contract
+ * is the external methods and event handlers that it exposes:
+ * id(), range(), value(), onChange, onIncrement, onDecrement.
+ *
+ * These contracts can then be implemented by anyone, including
+ * test stubs that allow us to produce the behavior we want.
+ * */
 function SelectorComponent(el) {
   this.el = el;
 
