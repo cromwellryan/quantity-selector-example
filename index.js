@@ -15,6 +15,13 @@ function withinRange(value, range) {
 function SelectorComponent(el) {
   this.el = el;
 
+  const qty = this.el.querySelector('.qty');
+
+  qty.addEventListener('change', () => {
+    if (this.onChange) this.onChange();
+  });
+
+
   this.id = function() {
     return el.dataset.id;
   }
@@ -58,7 +65,6 @@ function init(quantitySelectors) {
 
     const id = selectorComponent.id();
 
-    const qty = container.querySelector('.qty');
     const inc = container.querySelector('.inc');
     const dec = container.querySelector('.dec');
 
@@ -66,9 +72,9 @@ function init(quantitySelectors) {
     const range = selectorComponent.range();
 
     /* Need to know when the quantity selector is changed */
-    qty.addEventListener('change', () => {
+    selectorComponent.onChange = () => {
       myStore.mergeState({ [id]: withinRange(selectorComponent.value(), range) });
-    });
+    }
     /* Need to know when the quantity selector is incremented */
     inc.addEventListener('click', () => {
       myStore.mergeState({ [id]: withinRange(selectorComponent.value()+ 1, range) });
