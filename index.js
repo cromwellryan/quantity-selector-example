@@ -55,10 +55,10 @@ function SelectorComponent(el) {
 
 function init(quantitySelectors) {
   const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
+  const selectorComponents = [...quantitySelectors].map((el) => new SelectorComponent(el));
 
   function syncAllSelectors(store) {
-    quantitySelectors.forEach((el) => {
-      const selectorComponent = new SelectorComponent(el);
+    selectorComponents.forEach((selectorComponent) => {
 
       /* Need to know the id of the quantity selector */
       const id = selectorComponent.id();
@@ -68,11 +68,8 @@ function init(quantitySelectors) {
     });
   }
 
-  quantitySelectors.forEach((container) => {
-    const selectorComponent = new SelectorComponent(container);
-
+  selectorComponents.forEach((selectorComponent) => {
     const id = selectorComponent.id();
-
 
     /* Need to know the quantity selector range */
     const range = selectorComponent.range();
