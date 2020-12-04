@@ -17,9 +17,11 @@ function init(quantitySelectors) {
 
   function syncAllSelectors(store) {
     quantitySelectors.forEach((el) => {
+      /* Need to know the id of the quantity selector */
       const { id } = el.dataset;
       const qty = el.querySelector('.qty');
 
+      /* Need to set the quantity value it should be at */
       qty.value = store.state[id];
     });
   }
@@ -31,12 +33,15 @@ function init(quantitySelectors) {
     const inc = container.querySelector('.inc');
     const dec = container.querySelector('.dec');
 
+    /* Need to know when the quantity selector is changed */
     qty.addEventListener('change', () => {
       myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10), qty) });
     });
+    /* Need to know when the quantity selector is incremented */
     inc.addEventListener('click', () => {
       myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) + 1, qty) });
     });
+    /* Need to know when the quantity selector is decremented */
     dec.addEventListener('click', () => {
       myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) - 1, qty) });
     });
