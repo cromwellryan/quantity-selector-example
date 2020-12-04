@@ -90,7 +90,7 @@ function init(selectorComponents, store) {
   syncAllSelectors(store, selectorComponents);
 }
 
-export {
+module.exports = {
   Store,
   withinRange,
   SelectorComponent,
