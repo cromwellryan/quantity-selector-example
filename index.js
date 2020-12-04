@@ -53,9 +53,8 @@ function SelectorComponent(el) {
 
 }
 
-function init(quantitySelectors) {
+function init(selectorComponents) {
   const myStore = new Store({ a: 2, b: 4 }, syncAllSelectors);
-  const selectorComponents = [...quantitySelectors].map((el) => new SelectorComponent(el));
 
   function syncAllSelectors(store) {
     selectorComponents.forEach((selectorComponent) => {
@@ -94,5 +93,6 @@ function init(quantitySelectors) {
 export {
   Store,
   withinRange,
+  SelectorComponent,
   init
 }

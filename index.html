@@ -37,11 +37,12 @@
 
     <!-- Scripts -->
     <script type="module">
-      import { init } from './index.js';
+      import { init, SelectorComponent } from './index.js';
 
       const quantitySelectors = document.querySelectorAll('.qty-selector');
+      const selectorComponents = [...quantitySelectors].map((el) => new SelectorComponent(el));
 
-      init(quantitySelectors);
+      init(selectorComponents);
     </script>
 
   </body>
