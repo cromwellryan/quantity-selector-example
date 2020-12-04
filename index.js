@@ -25,6 +25,12 @@ function SelectorComponent(el) {
     return { min: qty.min, max: qty.max };
   }
 
+  this.value = function() {
+    const qty = this.el.querySelector('.qty');
+
+    return parseInt(qty.value, 10);
+  }
+
   this.setQuantity = function(newQuantity) {
     const qty = this.el.querySelector('.qty');
     qty.value = newQuantity;
@@ -61,15 +67,15 @@ function init(quantitySelectors) {
 
     /* Need to know when the quantity selector is changed */
     qty.addEventListener('change', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10), range) });
+      myStore.mergeState({ [id]: withinRange(selectorComponent.value(), range) });
     });
     /* Need to know when the quantity selector is incremented */
     inc.addEventListener('click', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) + 1, range) });
+      myStore.mergeState({ [id]: withinRange(selectorComponent.value()+ 1, range) });
     });
     /* Need to know when the quantity selector is decremented */
     dec.addEventListener('click', () => {
-      myStore.mergeState({ [id]: withinRange(parseInt(qty.value, 10) - 1, range) });
+      myStore.mergeState({ [id]: withinRange(selectorComponent.value()- 1, range) });
     });
   });
 
